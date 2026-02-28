@@ -1,0 +1,78 @@
+#con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+ 
+
+
+}
+button{
+    background-color: aqua;
+    border-radius: 5px;
+    width: 150px;
+    margin: 3%;
+    height: 50px;
+    cursor: pointer;
+
+}
+button:hover{
+    background-color: rgb(111, 196, 219);
+
+}
+#tasklist{
+    background-color: black;
+
+}
+h1{
+    color: aqua;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3rem;
+
+}
+#title{
+    width: 500px;
+    height: 20px;
+    margin-bottom: 5%;
+    border-color: beige;
+    border-radius:10px ;
+}
+#description{
+    width: 500px;
+    height: 200px;
+    border-color: beige;
+    border-radius:10px ;
+
+}
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aqua;
+    margin-top: 100%;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    margin: 1%;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 5px 2x 2px color( rgb(255, 255, 255));
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: rgb(14, 11, 11);
+    
+
+}
+header h2{
+    font-family: Arial,
+     Helvetica, sans-serif;
+    font-size: 2rem;
+}
+body{
+    background-color: rgb(6, 6, 6);
+    height: 100vh;
+}
+
