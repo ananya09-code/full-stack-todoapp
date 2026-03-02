@@ -4,31 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO-APP</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="static/style.css" />
   </head>
   <body>
     <header>
       <h2>LET WORK</h2>
       <a href="#"> HOME</a>
       <a href="#addtask"> ADDTASK</a>
-      <a href="#"> VIWETASK</a>
+      <a href="#viewtask"> VIWETASK</a>
       <a href="#"> ABOUT AS</a>
     </header>
     <div id="con">
       <section id="addtask">
         <h1>TODO-APP</h1>
-        <form>
-          <input type="text" id="title" placeholder="title" />
+        <form id="add" action="/add" method="post">
+          <input
+            type="text"
+            id="title"
+            name="tit"
+            placeholder="title"
+            required
+          />
           <br />
-          <input type="text" id="description" placeholder=" description" />
+          <input
+            type="text"
+            id="description"
+            name="dis"
+            placeholder=" description"
+            required
+          />
           <button type="submit">add</button>
         </form>
-        <div id="tasklist"></div>
       </section>
+      <div class="con2"></div>
     </div>
+
     <footer>
       <p>&copy; 2026 made by Ananya Mengistu. All Rights Reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
