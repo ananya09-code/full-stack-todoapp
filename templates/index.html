@@ -3,45 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO-APP</title>
-    <link rel="stylesheet" href="static/style.css" />
+    <title>Todo App</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
   <body>
-    <header>
-      <h2>LET WORK</h2>
-      <a href="#"> HOME</a>
-      <a href="#addtask"> ADDTASK</a>
-      <a href="#viewtask"> VIWETASK</a>
-      <a href="#"> ABOUT AS</a>
+    <header class="navbar">
+      <div class="container nav-content">
+        <h2 class="logo">Task<span>Flow</span></h2>
+        <nav>
+          <a href="#add">Add Task</a>
+          <a href="#tasks">Tasks</a>
+          <a href="#">About</a>
+        </nav>
+      </div>
     </header>
-    <div id="con">
-      <section id="addtask">
-        <h1>TODO-APP</h1>
-        <form id="add" action="/add" method="post">
-          <input
-            type="text"
-            id="title"
-            name="tit"
-            placeholder="title"
-            required
-          />
-          <br />
-          <input
-            type="text"
-            id="description"
+
+    <main class="container">
+      <section id="add" class="card">
+        <h1>Add New Task</h1>
+        <form id="add-task-form" method="POST" action="/add">
+          <input type="text" name="tit" placeholder="Task title" required />
+          <textarea
             name="dis"
-            placeholder=" description"
+            placeholder="Task description"
             required
-          />
-          <button type="submit">add</button>
+          ></textarea>
+          <button type="submit">Add Task</button>
         </form>
       </section>
-      <div class="con2"></div>
-    </div>
+
+      <section id="tasks" class="card">
+        <h2>Your Tasks</h2>
+        <div class="task-list con2">
+          <!-- JS will render tasks here -->
+        </div>
+      </section>
+    </main>
 
     <footer>
-      <p>&copy; 2026 made by Ananya Mengistu. All Rights Reserved.</p>
+      <p>© 2026 Ananya Mengistu — All rights reserved</p>
     </footer>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
