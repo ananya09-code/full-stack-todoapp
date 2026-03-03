@@ -37,6 +37,15 @@ def remove(id):
     db.session.delete(task)
     db.session.commit()
     return jsonify({'message': f'Record {id} deleted'})
+@app.route("/api/update/<int:id>",methods=["GET","POST"])
+def update(id):
+    task=tasklist.query.get_or_404(id)
+    if task:
+         data = request.get_json()
+         task.title=data["newtitle"]
+         task.note=data["newnote"]
+         db.session.commit()
+         return jsonify({'status': 'success'}) 
 
 if __name__ == '__main__':
     app.run(debug=True)  
