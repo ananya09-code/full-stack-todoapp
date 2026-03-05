@@ -11,7 +11,7 @@ class tasklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title= db.Column(db.String(80), nullable=False)
     note = db.Column(db.String(120),nullable=False)
-    status = db.Column(db.Boolean, default=False, nullable=False)
+    status = db.Column(db.Boolean, default=True, nullable=False)
 
     def __repr__(self):
         return f'<User {self.task}>', f'<User {self.note}>'  
@@ -46,6 +46,16 @@ def update(id):
          task.note=data["newnote"]
          db.session.commit()
          return jsonify({'status': 'success'}) 
+    
+@app.route("/api/status/<int:id>",methods=["GET","POST"])
+def status(id):
+    task=tasklist.query.get_or_404(id)
+    if task:
+         data = request.get_json()
+         task.status=data["newStatus"]
+         db.session.commit()
+         return jsonify({'status': 'success'}) 
+
 
 if __name__ == '__main__':
     app.run(debug=True)  

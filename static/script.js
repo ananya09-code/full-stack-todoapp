@@ -1,7 +1,41 @@
 const form = document.getElementById("add-task-form");
 const task = document.querySelector(".task-list");
 const edit= document.querySelector(".edit")
+const statu=document.querySelector(".taskop");
+const card=document.querySelector(".card-task")
 
+function checkStatus() {
+  const selecter=document.querySelectorAll(".taskop")
+  selecter.forEach(task => {
+    for (let option of task.options) {
+      if (option.defaultSelected) {
+        if (option.value === "false") {
+          const card2 = task.closest(".card-task");
+          task.style.backgroundColor = "black";
+          task.style.color = "white";
+          card2.style.opacity = "0.3";
+        }
+        break;
+      }
+    }
+  });
+}   
+async function updatestatus(id,newStatus){
+  try{
+
+  const callstatus= await fetch(url4=`api/status/${id}`,{method:"POST"
+     ,headers: {
+     'Content-Type': 'application/json',},
+     body:JSON.stringify({newStatus})})                     
+     const data = await callstatus.json()
+     console.log(data)
+  } catch(error){
+    console.log("there is a problem")
+  }
+
+
+
+}
 
 
 async function updatetask(upid,newtitle,newnote){
@@ -14,7 +48,7 @@ async function updatetask(upid,newtitle,newnote){
                           
      const data = await callup.json()
      if(data){
-      alert("task has been updated")
+      alert("task updated")
       getdata();
      }
      console.log(data)
@@ -50,8 +84,13 @@ async function getdata() {
     const data = await response.json();
 
     const html = data.map(t => {
-      const statusText = t.status ? "Completed" : "Pending";
-      const statusClass = t.status ? "completed" : "pending";
+      let selectedTrue = "";
+      if (t.status===false){
+        selectedTrue="selected"
+
+      }else{
+        selectedTrue=""
+      }
 
       return `
         <div class="card-task">
@@ -61,8 +100,10 @@ async function getdata() {
             <button class="del">Delete</button>
           </div>
           <div class="note">${t.note}</div>
-          <div class="status ${statusClass}">
-            Status: <span class="task-status">${statusText}</span>
+          <div class="status-con">
+            Status: <select class="taskop">
+                   <option value="true" >panding</option>
+                    <option value="false" ${selectedTrue}>completed</option></select>
              <div class="ed">
           <button class="edit">Edit</button></div>
           </div>
@@ -70,8 +111,13 @@ async function getdata() {
       `;
     }).join('');
 
+
+
+
     task.innerHTML = html;
     showssign(data);
+    checkStatus();
+    
 
   } catch (error) {
     console.log("there is a problem", error);
@@ -119,6 +165,29 @@ task.addEventListener("click", function(e) {
     }
   }
 });
+  
 
+task.addEventListener("change", function(e) {
+  if (e.target.classList.contains("taskop")) {
+
+    const select = e.target;
+    const card = select.closest(".card-task");
+    const id = card.querySelector(".id").textContent;
+
+    const newStatus = select.value === "true";
+    if (!newStatus) {
+      select.style.backgroundColor = "black";
+      select.style.color = "white";
+      card.style.opacity="0.3"
+    } else {
+      select.style.backgroundColor = "";
+      select.style.color = "";
+      card.style.opacity = "";
+    }
+
+    updatestatus(id, newStatus);
+    
+  }
+});
 getdata();
-
+checkStatus();
