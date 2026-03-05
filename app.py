@@ -1,4 +1,4 @@
-from flask import Flask,Request,jsonify,render_template,request,url_for,redirect
+from flask import Flask,jsonify,render_template,request
 from flask_sqlalchemy import SQLAlchemy   
 
 app = Flask(__name__)
@@ -14,10 +14,11 @@ class tasklist(db.Model):
     status = db.Column(db.Boolean, default=True, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.task}>', f'<User {self.note}>'  
+     return f"<Task {self.title}>" 
     
 with app.app_context(): 
-    db.create_all()   
+    db.create_all()  
+@app.route('/', methods=["GET", "POST"])   
 @app.route('/add', methods=["GET", "POST"])
 def home():
     if request.method == 'POST':

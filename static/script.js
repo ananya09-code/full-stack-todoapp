@@ -1,8 +1,7 @@
 const form = document.getElementById("add-task-form");
 const task = document.querySelector(".task-list");
-const edit= document.querySelector(".edit")
-const statu=document.querySelector(".taskop");
-const card=document.querySelector(".card-task")
+const dark=document.getElementById("dark")
+
 
 function checkStatus() {
   const selecter=document.querySelectorAll(".taskop")
@@ -72,7 +71,7 @@ async function delet(id) {
     const calldel = await fetch(`/api/remove/${id}`, { method: "POST" });
     const data = await calldel.json();
     console.log("success", data);
-    getdata(); // refresh list
+    getdata(); 
   } catch (error) {
     console.log("there is a problem", error);
   }
@@ -99,7 +98,7 @@ async function getdata() {
             <span class="title">${t.name}</span>
             <button class="del">Delete</button>
           </div>
-          <div class="note">${t.note}</div>
+          <div class="note">📝  ${t.note}</div>
           <div class="status-con">
             Status: <select class="taskop">
                    <option value="true" >panding</option>
@@ -165,7 +164,9 @@ task.addEventListener("click", function(e) {
     }
   }
 });
-  
+dark.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+})
 
 task.addEventListener("change", function(e) {
   if (e.target.classList.contains("taskop")) {
@@ -191,3 +192,5 @@ task.addEventListener("change", function(e) {
 });
 getdata();
 checkStatus();
+
+
